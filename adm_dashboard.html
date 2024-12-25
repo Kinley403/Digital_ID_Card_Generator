@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #0056b3;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #ffcc00;
+        }
+
+        /* Main Content */
+        main {
+            padding: 20px;
+        }
+        h2 {
+            color: #0056b3;
+            border-left: 5px solid #0056b3;
+            padding-left: 10px;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #0056b3;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Button Styling */
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+            border: none;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .approve {
+            background-color: #28a745;
+            color: white;
+        }
+        .approve:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+        .reject {
+            background-color: #dc3545;
+            color: white;
+        }
+        .reject:hover {
+            background-color: #c82333;
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+                border: 0;
+            }
+
+            thead {
+                display: none; /* Hide table headers */
+            }
+
+            tbody tr {
+                display: block;
+                margin-bottom: 15px;
+            }
+
+            td {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+
+            td::before {
+                content: attr(data-label); /* Use 'data-label' for labels */
+                flex: 1;
+                font-weight: bold;
+                color: #0056b3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="#requests">View Requests</a></li>
+                <li><a href="#approve">Approve/Reject</a></li>
+                <li><a href="admin_login.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="requests">
+            <h2>Student ID Card Requests</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Roll Number</th>
+                        <th>Department</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-label="Student Name">Kinley</td>
+                        <td data-label="Roll Number">05230119</td>
+                        <td data-label="Department">Computer System & Network</td>
+                        <td data-label="Status">Pending</td>
+                        <td data-label="Action">
+                            <button class="approve">Approve</button>
+                            <button class="reject">Reject</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
