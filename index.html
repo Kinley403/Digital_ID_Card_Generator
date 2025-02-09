@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Digital College ID Card Generator</title>
     <style>
         body {
@@ -73,10 +74,68 @@
             position: absolute;
             width: 100%;
             bottom: 0;
+=======
+    <title>Login</title>
+    <style>
+        /* CSS */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        .login-container h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+
+        #error-message {
+            color: red;
+            margin-top: 10px;
+>>>>>>> 9d7091a866cdd83eea0e6498f297686bfb5980a6
         }
     </style>
 </head>
 <body>
+<<<<<<< HEAD
     <header>
         <h1>Digital College ID Generator</h1>
         <nav>
@@ -97,5 +156,44 @@
     <footer>
         &copy; 2024 Digital College ID Card Generator. All rights reserved.
     </footer>
+=======
+    <!-- HTML -->
+    <div class="login-container">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p id="error-message"></p>
+    </div>
+
+    <script>
+        // JavaScript
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch("api/login.php", {
+                method: "POST",
+                body: formData,
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.status === "success") {
+                        if (data.role === "admin") {
+                            window.location.href = "admin/dashboard.html";
+                        } else if (data.role === "student") {
+                            window.location.href = "student/dashboard.html";
+                        }
+                    } else {
+                        document.getElementById("error-message").textContent = data.message;
+                    }
+                })
+                .catch((error) => console.error("Error:", error));
+        });
+    </script>
+>>>>>>> 9d7091a866cdd83eea0e6498f297686bfb5980a6
 </body>
 </html>
