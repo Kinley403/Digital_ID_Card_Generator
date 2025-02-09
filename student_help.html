@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Request ID Card</title>
+  <title>Student Help</title>
   <style>
     /* Same styles as Student Dashboard */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,45 +21,28 @@
 </head>
 <body>
   <div class="top-nav">
-    <div class="logo">Request ID Card</div>
+    <div class="logo">Help</div>
     <button class="logout" onclick="logout()">Logout</button>
   </div>
 
   <div class="side-nav">
-    <a href="std_request_id.html" style="background: #00897b;">Request ID Card</a>
+    <a href="std_request_id.html">Request ID Card</a>
     <a href="view_card.html">View ID Card</a>
     <a href="update_details.html">Update Details</a>
-    <a href="student_help.html">Help</a>
+    <a href="student_help.html" style="background: #00897b;">Help</a>
   </div>
 
   <div class="main">
-    <h1>Request Your ID Card</h1>
-    <div class="card">
-      <form id="requestIdForm">
-        <label for="studentId">Student ID:</label>
-        <input type="text" id="studentId" placeholder="Enter your Student ID" required><br><br>
-        <label for="reason">Reason for Request:</label><br>
-        <textarea id="reason" rows="4" placeholder="Explain why you're requesting a new ID card"></textarea><br>
-        <button type="button" onclick="submitRequest()">Submit Request</button>
-      </form>
-    </div>
+    <h1>Need Help?</h1>
+    <p>If you have any issues, please contact your administrator.</p><br>
+    <p>17xxxxxx</p>
+    <p>77xxxxxx</p>
   </div>
 
   <script>
     function logout() {
       alert("You have been logged out.");
       window.location.href = "std_login.html";
-    }
-
-    function submitRequest() {
-      const studentId = document.getElementById("studentId").value;
-      const reason = document.getElementById("reason").value;
-
-      if (studentId && reason) {
-        alert("Your request has been submitted successfully.");
-      } else {
-        alert("Please fill in all fields.");
-      }
     }
   </script>
 </body>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
+  <title>Generate ID Cards</title>
   <style>
     * {
       margin: 0;
@@ -103,11 +103,23 @@
       margin: 0 auto;
     }
 
-    .actions {
+    form {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-top: 20px;
+      gap: 15px;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
     }
 
     button {
@@ -129,7 +141,7 @@
 <body>
   <!-- Top Navigation -->
   <div class="top-nav">
-    <div class="logo">Admin Dashboard</div>
+    <div class="logo">Generate ID Cards</div>
     <button class="logout" onclick="logout()">Logout</button>
   </div>
 
@@ -138,18 +150,37 @@
     <a href="manage_students.html">Manage Students</a>
     <a href="generate_cards.html">Generate Cards</a>
     <a href="reports.html">View Reports</a>
-    <a href="send_notification.html">Send Notification</a> <!-- New Link Added -->
+    <a href="send_notification.html">Send Notification</a>
   </div>
 
   <!-- Main Content -->
   <div class="main">
-    <h1>Welcome to the Admin Dashboard</h1>
+    <h1>Generate Student ID Cards</h1>
     <div class="card">
-      <p>Use the side navigation to manage students, generate ID cards, view reports, or send notifications.</p>
+      <form id="generateCardsForm">
+        <label for="studentId">Student ID:</label>
+        <input type="text" id="studentId" placeholder="Enter Student ID" required>
+
+        <label for="cardDetails">Card Details:</label>
+        <textarea id="cardDetails" rows="4" placeholder="Enter card details"></textarea>
+
+        <button type="button" onclick="generateCard()">Generate Card</button>
+      </form>
     </div>
   </div>
 
   <script>
+    function generateCard() {
+      const studentId = document.getElementById("studentId").value;
+      const cardDetails = document.getElementById("cardDetails").value;
+
+      if (studentId && cardDetails) {
+        alert(`Card generated successfully for Student ID: ${studentId}`);
+      } else {
+        alert("Please fill in all fields.");
+      }
+    }
+
     function logout() {
       alert("You have been logged out.");
       window.location.href = "admin_login.html";

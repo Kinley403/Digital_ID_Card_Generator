@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
+  <title>View Student Details</title>
   <style>
     * {
       margin: 0;
@@ -99,37 +99,21 @@
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       width: 100%;
-      max-width: 600px;
+      max-width: 800px;
       margin: 0 auto;
     }
 
-    .actions {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    button {
-      padding: 10px;
-      font-size: 16px;
-      background: #003580;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background: #002244;
+    .placeholder {
+      font-size: 18px;
+      color: #555;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <!-- Top Navigation -->
   <div class="top-nav">
-    <div class="logo">Admin Dashboard</div>
+    <div class="logo">View Details</div>
     <button class="logout" onclick="logout()">Logout</button>
   </div>
 
@@ -138,14 +122,14 @@
     <a href="manage_students.html">Manage Students</a>
     <a href="generate_cards.html">Generate Cards</a>
     <a href="reports.html">View Reports</a>
-    <a href="send_notification.html">Send Notification</a> <!-- New Link Added -->
+    <a href="send_notification.html">Send Notification</a>
   </div>
 
   <!-- Main Content -->
   <div class="main">
-    <h1>Welcome to the Admin Dashboard</h1>
+    <h1>View Student Details</h1>
     <div class="card">
-      <p>Use the side navigation to manage students, generate ID cards, view reports, or send notifications.</p>
+      <p class="placeholder">Student details will be dynamically loaded here from the backend.</p>
     </div>
   </div>
 

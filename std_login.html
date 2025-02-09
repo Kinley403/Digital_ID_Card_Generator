@@ -1,114 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        /* CSS */
-        body {
-            font-family: Arial, sans-serif;
-            background: url('log_in.jpg') no-repeat center center fixed;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .login-container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 300px;
-            
-        }
-
-        .login-container h1 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #333;
-        }
-
-        .login-container input {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        .login-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .login-container button:hover {
-            background-color: #0056b3;
-        }
-
-        #error-message {
-            color: red;
-            margin-top: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Login & Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('log_in.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.8);
+      color: black;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 400px;
+      margin-top: 100px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #004d99;
+    }
+    input {
+      width: 94%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #004d99;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #003366;
+    }
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      margin: -5px 0 10px 0;
+    }
+    .form-section {
+      display: none;
+    }
+    .form-section.active {
+      display: block;
+    }
+    .toggle-links {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    <!-- HTML -->
-    <div class="login-container">
-        <h1>Login</h1>
-        <form id="loginForm">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <p id="error-message"></p>
+  <div class="container">
+    <!-- Login Section -->
+    <div id="loginForm" class="form-section active">
+      <h2>Student Login</h2>
+      <form id="studentLoginForm">
+        <input type="text" id="loginUsername" placeholder="Enter Username" required>
+        <input type="password" id="loginPassword" placeholder="Enter Password" required>
+        <p id="loginError" class="error"></p>
+        <button type="button" onclick="handleLogin()">Login</button>
+      </form>
+      <div class="toggle-links">
+        <a href="#" onclick="toggleForm('registration')">Don't have an account? Register</a>
+      </div>
     </div>
 
-    <script>
-        // JavaScript
-        document.getElementById("loginForm").addEventListener("submit", function (e) {
-            e.preventDefault();
+    <!-- Registration Section -->
+    <div id="registrationForm" class="form-section">
+      <h2>New User Registration</h2>
+      <form id="studentRegistrationForm">
+        <input type="text" id="registerStudentID" placeholder="Enter Student ID" required>
+        <input type="text" id="registerUsername" placeholder="Enter Username" required>
+        <input type="email" id="registerEmail" placeholder="Enter Email" required>
+        <input type="password" id="registerPassword" placeholder="Enter Password" required>
+        <input type="password" id="registerConfirmPassword" placeholder="Confirm Password" required>
+        <p id="registerError" class="error"></p>
+        <button type="submit">Register</button>
 
-            const formData = new FormData(this);
+      </form>
+      <div class="toggle-links">
+        <a href="#" onclick="toggleForm('login')">Already have an account? Login</a>
+      </div>
+    </div>
+  </div>
 
-            fetch("api_login.php", {
-                method: "POST",
-                body: formData,
-            })
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok");
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    if (data.status === "success") {
-                        if (data.role === "admin") {
-                            window.location.href = "adm_dashboard.html";
-                        } else if (data.role === "student") {
-                            window.location.href = "std_dashboard.html";
-                        }
-                    } else {
-                        document.getElementById("error-message").textContent = data.message;
-                    }
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                    document.getElementById("error-message").textContent =
-                        "An error occurred. Please try again.";
-                });
-        });
+  <script>
+    function handleRegistration() {
+        const studentID = document.getElementById('registerStudentID').value.trim();
+        const name = document.getElementById('registerName').value.trim();
+        const username = document.getElementById('registerUsername').value.trim();
+        const email = document.getElementById('registerEmail').value.trim();
+        const department = document.getElementById('registerDepartment').value.trim();
+        const contact = document.getElementById('registerContact').value.trim();
+        const password = document.getElementById('registerPassword').value;
+        const confirmPassword = document.getElementById('registerConfirmPassword').value;
+        const error = document.getElementById('registerError');
+        
+        error.textContent = '';
+    
+        if (!studentID || !name || !username || !email || !department || !contact || !password || !confirmPassword) {
+            error.textContent = 'All fields are required.';
+            return;
+        }
+        if (password !== confirmPassword) {
+            error.textContent = 'Passwords do not match.';
+            return;
+        }
+    
+        const formData = new FormData();
+        formData.append('action', 'register');
+        formData.append('student_id', studentID);
+        formData.append('name', name);
+        formData.append('username', username);
+        formData.append('email', email);
+        formData.append('department', department);
+        formData.append('contact', contact);
+        formData.append('password', password);
+    
+        fetch('Digital ID Card/Project/std_login.php', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert(data.message);
+                document.getElementById('studentRegistrationForm').reset();
+            } else {
+                error.textContent = data.message;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
     </script>
+
 </body>
 </html>
